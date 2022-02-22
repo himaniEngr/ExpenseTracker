@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import OverviewComponent from "./OverviewComponent";
+import TransactionComponent from "./TransactionComponent";
 
 const Container = styled.div`
   display: flex;
@@ -8,6 +10,11 @@ const Container = styled.div`
   margin: 30px 0 10px;
 `;
 const HomeComponent = (props) => {
-  return <Container>Home Component</Container>;
+  return (
+    <Container>
+      <OverviewComponent />
+      <TransactionComponent />
+    </Container>
+  );
 };
 export default HomeComponent;
