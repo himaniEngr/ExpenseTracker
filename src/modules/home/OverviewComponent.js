@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -24,14 +25,31 @@ const AddTransaction = styled.button`
   font-weight: bold;
   font-size: 15px;
 `;
-
+const AddTransactionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e6e8e9;
+  gap: 10px;
+  padding: 15px 20px;
+  margin: 10px 20px;
+`;
+const AddTransactionView = () => {
+  return (
+    <AddTransactionContainer>
+      <input placeholder="amount" />
+      <input placeholder="description" />
+    </AddTransactionContainer>
+  );
+};
 const OverviewComponent = (props) => {
+  const [isAddTxnVisible, toggleAddTxn] = useState(true);
   return (
     <Container>
       <BalanceBox>
         Balance: $10000
-        <AddTransaction>ADD</AddTransaction>
+        <AddTransaction>{isAddTxnVisible ? "CANCEL" : "ADD"}</AddTransaction>
       </BalanceBox>
+      {isAddTxnVisible && <AddTransactionView />}
     </Container>
   );
 };
