@@ -8,6 +8,7 @@ const Container = styled.div`
   align-items: center;
   font-family: montserrat;
   margin: 30px 0 10px;
+  width: 360px;
 `;
 const HomeComponent = (props) => {
   return (

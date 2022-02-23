@@ -15,12 +15,14 @@ const BalanceBox = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  width: 100%;
 `;
-const AddTransaction = styled.button`
+const AddTransaction = styled.div`
   background: black;
   color: white;
   padding: 5px 10px;
   border-radius: 4px;
+  text-align: center;
   cursor: pointer;
   font-weight: bold;
   font-size: 15px;
@@ -30,6 +32,7 @@ const AddTransactionContainer = styled.div`
   flex-direction: column;
   border: 1px solid #e6e8e9;
   gap: 10px;
+  width: 100%;
   padding: 15px 20px;
   margin: 10px 20px;
   & input {
@@ -44,6 +47,7 @@ const RadioBox = styled.div`
   flex-direction: row;
   width: 100%;
   align-items: center;
+  gap: 10px;
 `;
 
 const AddTransactionView = () => {
@@ -57,6 +61,7 @@ const AddTransactionView = () => {
         <input type="radio" id="income" name="type" value="INCOME" />
         <label htmlFor="income">Income</label>
       </RadioBox>
+      <AddTransaction>Add Transaction</AddTransaction>
     </AddTransactionContainer>
   );
 };
@@ -66,7 +71,13 @@ const OverviewComponent = (props) => {
     <Container>
       <BalanceBox>
         Balance: $10000
-        <AddTransaction>{isAddTxnVisible ? "CANCEL" : "ADD"}</AddTransaction>
+        <AddTransaction
+          onClick={() => {
+            toggleAddTxn(!isAddTxnVisible);
+          }}
+        >
+          {isAddTxnVisible ? "CANCEL" : "ADD"}
+        </AddTransaction>
       </BalanceBox>
       {isAddTxnVisible && <AddTransactionView />}
     </Container>
