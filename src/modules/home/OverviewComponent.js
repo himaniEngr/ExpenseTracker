@@ -32,12 +32,31 @@ const AddTransactionContainer = styled.div`
   gap: 10px;
   padding: 15px 20px;
   margin: 10px 20px;
+  & input {
+    outline: none;
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid #e6e8e9;
+  }
 `;
+const RadioBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+`;
+
 const AddTransactionView = () => {
   return (
     <AddTransactionContainer>
       <input placeholder="amount" />
       <input placeholder="description" />
+      <RadioBox>
+        <input type="radio" id="expense" name="type" value="EXPENSE" />
+        <label htmlFor="expense">Expenses</label>
+        <input type="radio" id="income" name="type" value="INCOME" />
+        <label htmlFor="income">Income</label>
+      </RadioBox>
     </AddTransactionContainer>
   );
 };
