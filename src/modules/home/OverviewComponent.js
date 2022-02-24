@@ -49,13 +49,38 @@ const RadioBox = styled.div`
   align-items: center;
   gap: 10px;
 `;
-
+const ExpenseContainer = styled.div`
+  display: flex;
+  gap: 12px;
+  margin: 20px;
+`;
+const ExpenseBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  border: 1px solid #e6e8e9;
+  padding: 15px 20px;
+  width: 135px;
+  font-size: 14px;
+  & span {
+    font-weight: bold;
+    font-size: 20px;
+    color: ${(props) => {
+      return props.isIncome ? "green" : "red";
+    }};
+  }
+`;
 const AddTransactionView = (props) => {
   const [amount, setAmount] = useState(0);
   const [desc, setDesc] = useState("");
   const [type, setType] = useState("EXPENSE");
   const addTransaction = () => {
-    console.log({ amount, desc, type });
+    props.addTransaction({
+      amount: Number(amount),
+      desc,
+      type,
+      id: Date.now(),
+    });
     props.toggleAddTxn();
   };
 
@@ -63,6 +88,7 @@ const AddTransactionView = (props) => {
     <AddTransactionContainer>
       <input
         placeholder="amount"
+        type="number"
         value={amount}
         onChange={(e) => {
           return setAmount(e.target.value);
@@ -113,7 +139,21 @@ const OverviewComponent = (props) => {
           {isAddTxnVisible ? "CANCEL" : "ADD"}
         </AddTransaction>
       </BalanceBox>
-      {isAddTxnVisible && <AddTransactionView toggleAddTxn={toggleAddTxn} />}
+      {isAddTxnVisible && (
+        <AddTransactionView
+          toggleAddTxn={toggleAddTxn}
+          addTransaction={props.addTransaction}
+        />
+      )}
+
+      <ExpenseContainer>
+        <ExpenseBox isIncome={false}>
+          Expense<span>$1000</span>
+        </ExpenseBox>
+        <ExpenseBox isIncome={true}>
+          Income<span>$5000</span>
+        </ExpenseBox>
+      </ExpenseContainer>
     </Container>
   );
 };
