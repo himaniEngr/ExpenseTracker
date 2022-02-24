@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -22,8 +23,22 @@ const Cell = styled.div`
   padding: 10px 15px;
   font-size: 14px;
   border-radius: 2px;
+  align-items: center;
+  font-weight: normal;
+  justify-content: space-between;
+  width: 75%;
+  border-right: 4px solid
+    ${(props) => {
+      return props.type === "INCOME" ? "green" : "red";
+    }};
 `;
-
+/*
+border-right: 4px solid
+    ${(props) => {
+      return props.type === "INCOME" ? "green" : "red";
+    }};
+ return props.isExpense ? "green" : "red";
+*/
 const TransactionCell = (props) => {
   return (
     <Cell>

@@ -130,7 +130,7 @@ const OverviewComponent = (props) => {
   return (
     <Container>
       <BalanceBox>
-        Balance: $10000
+        Balance: ${props.income - props.expense}
         <AddTransaction
           onClick={() => {
             toggleAddTxn(!isAddTxnVisible);
@@ -148,10 +148,10 @@ const OverviewComponent = (props) => {
 
       <ExpenseContainer>
         <ExpenseBox isIncome={false}>
-          Expense<span>$1000</span>
+          Expense<span>${props.expense}</span>
         </ExpenseBox>
         <ExpenseBox isIncome={true}>
-          Income<span>$5000</span>
+          Income<span>${props.income}</span>
         </ExpenseBox>
       </ExpenseContainer>
     </Container>
