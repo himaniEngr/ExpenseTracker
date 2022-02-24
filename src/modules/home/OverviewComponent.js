@@ -34,7 +34,7 @@ const AddTransactionContainer = styled.div`
   gap: 10px;
   width: 100%;
   padding: 15px 20px;
-  margin: 10px 20px;
+  margin: 20px;
   & input {
     outline: none;
     padding: 10px 12px;
@@ -50,18 +50,52 @@ const RadioBox = styled.div`
   gap: 10px;
 `;
 
-const AddTransactionView = () => {
+const AddTransactionView = (props) => {
+  const [amount, setAmount] = useState(0);
+  const [desc, setDesc] = useState("");
+  const [type, setType] = useState("EXPENSE");
+  const addTransaction = () => {
+    console.log({ amount, desc, type });
+    props.toggleAddTxn();
+  };
+
   return (
     <AddTransactionContainer>
-      <input placeholder="amount" />
-      <input placeholder="description" />
+      <input
+        placeholder="amount"
+        value={amount}
+        onChange={(e) => {
+          return setAmount(e.target.value);
+        }}
+      />
+      <input
+        placeholder="description"
+        value={desc}
+        onChange={(e) => {
+          return setDesc(e.target.value);
+        }}
+      />
       <RadioBox>
-        <input type="radio" id="expense" name="type" value="EXPENSE" />
-        <label htmlFor="expense">Expenses</label>
-        <input type="radio" id="income" name="type" value="INCOME" />
+        <input
+          type="radio"
+          id="expense"
+          name="type"
+          value="EXPENSE"
+          checked={type === "EXPENSE"}
+          onChange={(e) => setType(e.target.value)}
+        />
+        <label htmlFor="expense">Expense</label>
+        <input
+          type="radio"
+          id="income"
+          name="type"
+          value="INCOME"
+          checked={type === "INCOME"}
+          onChange={(e) => setType(e.target.value)}
+        />
         <label htmlFor="income">Income</label>
       </RadioBox>
-      <AddTransaction>Add Transaction</AddTransaction>
+      <AddTransaction onClick={addTransaction}>Add Transaction</AddTransaction>
     </AddTransactionContainer>
   );
 };
@@ -79,7 +113,7 @@ const OverviewComponent = (props) => {
           {isAddTxnVisible ? "CANCEL" : "ADD"}
         </AddTransaction>
       </BalanceBox>
-      {isAddTxnVisible && <AddTransactionView />}
+      {isAddTxnVisible && <AddTransactionView toggleAddTxn={toggleAddTxn} />}
     </Container>
   );
 };
