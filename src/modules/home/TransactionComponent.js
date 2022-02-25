@@ -41,7 +41,7 @@ border-right: 4px solid
 */
 const TransactionCell = (props) => {
   return (
-    <Cell>
+    <Cell type={props.payload.type}>
       <span>{props.payload.desc}</span>
       <span>${props.payload.amount}</span>
     </Cell>
